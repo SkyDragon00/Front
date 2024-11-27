@@ -5,7 +5,10 @@ export default function AddGame() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [tags, setTags] = useState([]);
   const [message, setMessage] = useState("");
+
+  const availableTags = ['Action', 'Platform', 'Sandbox', 'Horror', 'Shooter', 'Halloween', 'Christmass', 'RPG', 'Adventure', 'Sports', 'Fighting', 'Rhythm'];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,13 +17,15 @@ export default function AddGame() {
       const { data } = await axios.post("/game/add", {
         name,
         description,
-        price: parseFloat(price), // Asegúrate de enviar un número para el precio
+        price: parseFloat(price),
+        tags,
       });
 
       setMessage(data.message);
       setName("");
       setDescription("");
       setPrice("");
+      setTags([]);
     } catch (error) {
       console.error("Error adding game:", error);
       setMessage("Failed to add game. Please try again.");
@@ -51,8 +56,13 @@ export default function AddGame() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
-        />
-        <button type="submit">Add Game</button>
+          />
+          <select multiple value={tags} onChange={(e) => setTags([...e.target.selectedOptions].map(o => o.value))}>
+            {availableTags.map(tag => (
+              <option key={tag} value={tag}>{tag}</option>
+            ))}
+          </select>
+          <button type="submit">Add Game</button>
       </form>
     </div>
   );
