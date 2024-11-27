@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
+
 
 export default function AdminPage() {
   const router = useRouter();
@@ -14,6 +16,12 @@ export default function AdminPage() {
   return (
     <div>
       <h1>Welcome Admin</h1>
+      <nav>
+        <ul>
+          <li><Link href="/admin/add-game">Add Game</Link></li>
+          {/* Otros enlaces del panel */}
+        </ul>
+      </nav>
     </div>
   );
 }
