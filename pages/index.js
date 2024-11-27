@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import LogoDragon from "../public/LogoDragon.png";
-
+import '../styles/globals.css';
 
 export default function Home() {
   return (

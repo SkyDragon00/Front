@@ -1,6 +1,6 @@
 export default function Layout({ children }) {
     return (
-      <div>
+      <div className="general">
         <header>
           <h1>Draconic Games</h1>
         </header>
